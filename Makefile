@@ -12,7 +12,7 @@ all: $(LIBFT) $(NAME)
 
 # push_swap'in derlenmesi
 $(NAME): $(OBJECTS)
-	cc $(CFLAGS) $(OBJECTS) -L$(LIBFT_DIR) -lft -o $(NAME)
+	ar rcs $(NAME) $(OBJECTS)
 
 # Libft'in derlenmesi
 $(LIBFT):

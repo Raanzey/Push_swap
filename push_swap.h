@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 17:15:29 by yozlu             #+#    #+#             */
-/*   Updated: 2025/01/20 17:08:51 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/01/21 18:16:30 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct stack
 
 int	ft_atoi(const char *str);
 t_node *addValue(t_node *node, int data);
+t_node *step_ss(t_node *node);
 void display(t_node *node);
 char	**ft_split(char const *s, char c);
 

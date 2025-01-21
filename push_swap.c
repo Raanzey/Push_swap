@@ -3,26 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 17:13:01 by yozlu             #+#    #+#             */
-/*   Updated: 2025/01/20 18:22:50 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/01/21 18:42:51 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-// t_stack swap_step(char *str)
-// {
-//     if (str == "sa" || str == "ss")
-//     {
-        
-//     }
-//     else if (str == "sb" || str == "ss")
-//     {
-//         /* code */
-//     }
+void swap_step(char *str, t_stack *stk)
+{
+    if (ft_strncmp(str, "sa", 2) == 0|| ft_strncmp(str, "ss", 2) == 0)
+        stk->a = step_ss(stk->a);
+    if (ft_strncmp(str, "sb", 2) == 0|| ft_strncmp(str, "ss", 2) == 0)
+       stk->b = step_ss(stk->b);
+}
 //     else if (str == "pa")
 //     {
 //         /* code */
@@ -47,7 +44,7 @@
 //     {
 //         /* code */
 //     }
-// }
+
 
 t_node *addValue(t_node *node, int data)
 {
@@ -94,6 +91,7 @@ int main(int argc, char **argv)
     { 
             stk->a = addValue(stk->a, ft_atoi(argv[i]));
             i++;
-    }     
+    } 
+    swap_step("sa", stk);    
     display(stk->a);     
 }
