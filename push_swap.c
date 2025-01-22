@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 17:13:01 by yozlu             #+#    #+#             */
-/*   Updated: 2025/01/21 18:42:51 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/22 18:22:26 by yozlu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,34 +17,21 @@ void swap_step(char *str, t_stack *stk)
 {
     if (ft_strncmp(str, "sa", 2) == 0|| ft_strncmp(str, "ss", 2) == 0)
         stk->a = step_ss(stk->a);
-    if (ft_strncmp(str, "sb", 2) == 0|| ft_strncmp(str, "ss", 2) == 0)
-       stk->b = step_ss(stk->b);
+    else if (ft_strncmp(str, "sb", 2) == 0|| ft_strncmp(str, "ss", 2) == 0)
+        stk->b = step_ss(stk->b);
+    else if (ft_strncmp(str, "pa", 2) == 0)
+        stk->a = push_a(stk); 
+    else if (ft_strncmp(str, "pb", 2) == 0)
+        stk->b = push_b(stk);
+    else if (ft_strncmp(str, "ra", 2) == 0)
+        stk->a = rotate_ab(stk->a);
+    else if (ft_strncmp(str, "rb", 2) == 0)
+        stk->b = rotate_ab(stk->b);
+    else if (ft_strncmp(str, "rra", 3) == 0|| ft_strncmp(str, "rrr", 2) == 3)
+        stk->a = rev_rotate_ab(stk->a);
+    else if (ft_strncmp(str, "rrb", 3) == 0|| ft_strncmp(str, "rrr", 2) == 3)
+        stk->b = rev_rotate_ab(stk->b);
 }
-//     else if (str == "pa")
-//     {
-//         /* code */
-//     }
-//     else if (str == "pb")
-//     {
-//         /* code */
-//     }
-//     else if (str == "ra" || str == "rr")
-//     {
-//         /* code */
-//     }
-//     else if (str == "rb" || str == "rr")
-//     {
-//         /* code */
-//     }
-//     else if (str == "rra" || str == "rrr")
-//     {
-//         /* code */
-//     }
-//     else if (str == "rrb" || str == "rrr")
-//     {
-//         /* code */
-//     }
-
 
 t_node *addValue(t_node *node, int data)
 {
@@ -91,7 +78,8 @@ int main(int argc, char **argv)
     { 
             stk->a = addValue(stk->a, ft_atoi(argv[i]));
             i++;
-    } 
-    swap_step("sa", stk);    
-    display(stk->a);     
+    }
+    swap_step("rra", stk);      
+    display(stk->a);    
+    //display(stk->b);     
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 17:15:29 by yozlu             #+#    #+#             */
-/*   Updated: 2025/01/21 18:16:30 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/22 15:05:40 by yozlu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,13 @@ typedef struct stack
     t_node *b;
 }t_stack;
 
-int	ft_atoi(const char *str);
+
+t_node *push_b(t_stack *stk);
+t_node *push_a(t_stack *stk);
+t_node *rotate_ab(t_node *node);
+t_node *rev_rotate_ab(t_node *node);
+
 t_node *addValue(t_node *node, int data);
 t_node *step_ss(t_node *node);
 void display(t_node *node);
-char	**ft_split(char const *s, char c);
-
 #endif

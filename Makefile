@@ -1,5 +1,5 @@
 NAME = push_swap.a
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS =  -g
 SOURCES = push_swap.c push_swap_utils.c
 OBJECTS = $(SOURCES:.c=.o)
 
