@@ -1,6 +1,6 @@
 NAME = push_swap.a
-CFLAGS =  -g
-SOURCES = push_swap.c push_swap_utils.c
+CFLAGS = -Wall -Wextra -Werror
+SOURCES = push_swap.c push_swap_utils.c control.c
 OBJECTS = $(SOURCES:.c=.o)
 
 # Libft Kütüphanesi

@@ -6,7 +6,7 @@
 /*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 17:13:01 by yozlu             #+#    #+#             */
-/*   Updated: 2025/01/22 18:22:26 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/01/27 18:44:16 by yozlu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,20 +66,21 @@ int main(int argc, char **argv)
     t_stack *stk;
     int i;
     
-    stk = malloc(sizeof(t_stack));
-    stk->a = NULL;
-    stk->b = NULL;
     i = 1;
     if (argc == 2) {
         argv = ft_split(argv[1], ' ');   
         i = 0;  
     }
+    check(argv);
+    stk = malloc(sizeof(t_stack));
+    stk->a = NULL;
+    stk->b = NULL;
     while (argv[i])
     { 
             stk->a = addValue(stk->a, ft_atoi(argv[i]));
             i++;
     }
-    swap_step("rra", stk);      
+    //swap_step("rra", stk);   
     display(stk->a);    
     //display(stk->b);     
 }
