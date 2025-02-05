@@ -6,7 +6,7 @@
 /*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:41:06 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/05 16:37:13 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/02/05 18:14:40 by yozlu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,25 @@ void	check(char **data)
 	int	i;
 	int	j;
 	int	temp;
+	char *free_temp;
 
 	i = 0;
 	while (data[i])
 	{
-		j = 0;
-		if (data[i][j] == '+' || data[i][j] == '-')
-			j++;
-		while (data[i][j])
-		{
+		j = -1;
+		if (data[i][++j] == '+' || data[i][++j] == '-')
+		while (data[i][++j])
 			if (ft_isdigit(data[i][j]) == 0)
 				error(data);
-			j++;
-		}
 		if (ft_atol(data[i]) > 2147483647 || ft_atol(data[i]) < -2147483648)
 			error(data);
 		temp = ft_atol(data[i]);
-		if (ft_strcmp(ft_itoa(temp), data[i]) != 0 && (data[i][0] != '+'&& data[i][0] != '-'))
-			error(data);
+		free_temp = ft_itoa(temp);
+		if (ft_strcmp(free_temp, data[i]) != 0 && (data[i][0] != '+'&& data[i][0] != '-'))
+		{
+			error(free_temp);
+			error(data);			
+		}		
 		i++;
 	}
 	check_last(data);
