@@ -1,31 +1,27 @@
-NAME = push_swap.a
-CFLAGS = -Wall -Wextra -Werror
-SOURCES = push_swap.c push_swap_utils.c control.c
-OBJECTS = $(SOURCES:.c=.o)
+NAME = push_swap
 
-# Libft Kütüphanesi
-LIBFT_DIR = ../Push_swap/libft
-LIBFT = $(LIBFT_DIR)/libft.a
+CFLAGS = cc -Wall -Wextra -Werror
 
-# Default Rule
-all: $(LIBFT) $(NAME)
+SOURCES = push_swap.c push_swap_utils.c control.c libft_utils.c
 
-# push_swap'in derlenmesi
-$(NAME): $(OBJECTS)
-	ar rcs $(NAME) $(OBJECTS)
+LIBFT = libft/libft.a
 
-# Libft'in derlenmesi
-$(LIBFT):
-	make -C $(LIBFT_DIR)
+
+
+all: $(NAME)
+
+
+$(NAME): $(SOURCES)
+	make -C ./libft -s
+	$(CFLAGS) -g -o $(NAME) $(SOURCES) $(LIBFT)
 
 # Temizleme işlemleri
 clean:
-	rm -f $(OBJECTS)
-	make -C $(LIBFT_DIR) clean
+	make clean -C ./libft -s
 
 fclean: clean
+	make fclean -C ./libft -s
 	rm -f $(NAME)
-	make -C $(LIBFT_DIR) fclean
 
 re: fclean all
 

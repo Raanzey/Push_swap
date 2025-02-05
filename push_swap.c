@@ -6,13 +6,21 @@
 /*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 17:13:01 by yozlu             #+#    #+#             */
-/*   Updated: 2025/01/27 18:44:16 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/02/05 16:14:33 by yozlu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
+// void	free_list(t_node *node)
+// {
+//     t_node *temp = node;
+//     while (temp != NULL )
+//         temp = temp->next;
+
+// 		free(node);
+// }
 void swap_step(char *str, t_stack *stk)
 {
     if (ft_strncmp(str, "sa", 2) == 0|| ft_strncmp(str, "ss", 2) == 0)
@@ -52,7 +60,7 @@ t_node *addValue(t_node *node, int data)
     temp->next->next = NULL;
     return node;     
 }
-void display(t_node *node)
+void list_print(t_node *node)
 {
     t_node *temp = node;
     while (temp != NULL )
@@ -63,24 +71,22 @@ void display(t_node *node)
 }
 int main(int argc, char **argv)
 {
-    t_stack *stk;
-    int i;
-    
-    i = 1;
-    if (argc == 2) {
-        argv = ft_split(argv[1], ' ');   
-        i = 0;  
-    }
-    check(argv);
-    stk = malloc(sizeof(t_stack));
-    stk->a = NULL;
-    stk->b = NULL;
-    while (argv[i])
-    { 
-            stk->a = addValue(stk->a, ft_atoi(argv[i]));
-            i++;
-    }
-    //swap_step("rra", stk);   
-    display(stk->a);    
+    //t_stack *stk;
+    //int i;
+    char **av;
+    av = split_check(argc, argv);
+    //i = 0;
+    check(av);
+    // stk = malloc(sizeof(t_stack));
+    // stk->a = NULL;
+    // stk->b = NULL;
+    // while (av[i])
+    // { 
+    //         stk->a = addValue(stk->a, ft_atoi(av[i]));
+    //         i++;
+    // }
+    //swap_step("rra", stk.a);   
+    //list_print(stk->a);
+    //free_list(stk->a);    
     //display(stk->b);     
 }
