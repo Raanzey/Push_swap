@@ -6,12 +6,23 @@
 /*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:25:19 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/05 16:25:07 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/02/08 18:17:32 by yozlu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+void	free_list(t_node *node)
+{
+	t_node	*temp;
+
+	while (node)
+	{
+		temp = node;
+		node = node->next;
+		free(temp);
+	}
+}
 void	free_argv(char **argv)
 {
 	int	i;
@@ -24,31 +35,33 @@ void	free_argv(char **argv)
 		free(argv);
 	}
 }
-char **split_check(int argc,char **argv)
-{ 
-    char    **av;   
-    int i;
-    int j;
-    av = argv;
-    i = 1;
-    if (argc == 2)
-    {   
-        av = ft_split(av[1], ' ');
-        i = 0; 
-    }       
-    else
-    {
-        j = 0;
-        while (argv[i])
-        {
-            av[j] = ft_strdup(argv[i]);
-            i++;
-            j++;
-        }
-        av[j] = NULL;
-		//free_argv(argv);   
-    }
-    return av;
+char	**split_check(int argc, char **argv)
+{
+	char	**av;
+	int		i;
+	int		j;
+
+	av = NULL;
+	i = 1;
+	if (argc == 2)
+		av = ft_split(argv[1], ' ');
+	else
+	{
+		av = malloc(argc * sizeof(char*));
+		if (!av)
+			return (NULL);
+		j = 0;
+		while (argv[i])
+		{
+			av[j] = ft_strdup(argv[i]);
+			if (!av[j])  
+                return(free_argv(av),NULL);  
+			i++;
+			j++;
+		}
+		av[j] = NULL;
+	}
+	return (av);
 }
 long	ft_atol(const char *str)
 {
@@ -67,7 +80,7 @@ long	ft_atol(const char *str)
 			write(1, "Error\n", 6);
 			exit(EXIT_FAILURE);
 		}
-		if (str[i] == '-')		
+		if (str[i] == '-')
 			count = -1;
 		i++;
 	}

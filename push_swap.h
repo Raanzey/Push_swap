@@ -6,7 +6,7 @@
 /*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 17:15:29 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/05 16:28:56 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/02/10 15:18:41 by yozlu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,20 @@ t_node			*rotate_ab(t_node *node);
 t_node			*rev_rotate_ab(t_node *node);
 t_node			*step_ss(t_node *node);
 t_node			*addValue(t_node *node, int data);
+void			list_op_add(t_stack *stk, char **av, int ac);
 
 long			ft_atol(const char *str);
 int				ft_strcmp(const char *str1, const char *str2);
 char			**split_check(int argc, char **argv);
 
+void			sorter_2(t_stack *stk);
+void			sorter_3(t_stack *stk);
+void			swap_step(char *str, t_stack *stk);
 void			free_argv(char **argv);
 void			free_list(t_node *node);
 void			check_last(char **data);
 void			check_last(char **data);
 void			list_print(t_node *node);
 void			check(char **data);
-void			error(char **data);
+void			error(char **data, char *temp_free);
 #endif

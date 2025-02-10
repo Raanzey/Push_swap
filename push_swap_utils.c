@@ -6,7 +6,7 @@
 /*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 14:57:21 by yozlu             #+#    #+#             */
-/*   Updated: 2025/01/27 18:26:20 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/02/10 15:45:06 by yozlu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_node	*push_b(t_stack *stk)
 	else
 	{
 		first = malloc(sizeof(t_node));
-		if (stk->b)
+		if (!first)
 			return (NULL);
 		first->next = stk->b;
 		stk->b = first;
