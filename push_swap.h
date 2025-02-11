@@ -6,7 +6,7 @@
 /*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 17:15:29 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/10 15:18:41 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/02/11 20:15:59 by yozlu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ t_node			*step_ss(t_node *node);
 t_node			*addValue(t_node *node, int data);
 void			list_op_add(t_stack *stk, char **av, int ac);
 
-long			ft_atol(const char *str);
+int				list_len(t_node *node);
 int				ft_strcmp(const char *str1, const char *str2);
+long			ft_atol(const char *str);
 char			**split_check(int argc, char **argv);
 
 void			sorter_2(t_stack *stk);
