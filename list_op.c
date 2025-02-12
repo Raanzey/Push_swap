@@ -6,12 +6,26 @@
 /*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:48:08 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/11 17:10:52 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/02/12 20:18:29 by yozlu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+int calculate_index(t_node *node, int data)
+{
+	int i;
+	t_node *temp;
+
+	temp = node;
+	i = 0;
+	if (temp != NULL && temp->data != data)
+	{
+		i++;
+		temp = temp->next;
+	}
+	return i;	
+}
 int list_len(t_node *node)
 {
 	int count;
@@ -32,12 +46,7 @@ void	list_op_add(t_stack *stk, char **av, int ac)
 	if (ac == 4)
 		sorter_3(stk);
 	else if (ac == 3)
-		sorter_2(stk); 
-}
-void	sorter_2(t_stack *stk)
-{
-	if (stk->a->data > stk->a->next->data)
-		swap_step("sa", stk);
+		swap_step("sa", stk); 
 }
 void	sorter_3(t_stack *stk)
 {

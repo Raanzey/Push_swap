@@ -6,7 +6,7 @@
 /*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 17:13:01 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/11 17:00:06 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/02/12 19:38:39 by yozlu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,9 @@ int	main(int argc, char **argv)
 	stk->a = NULL;
 	stk->b = NULL;
 	list_op_add(stk, av, argc);
-    list_print(stk->a);
-    list_print(stk->b);
+	turk_sorter(stk);
+    // list_print(stk->a);
+    // list_print(stk->b);
 	free_list(stk->b);
 	free_list(stk->a);
 	free_argv(av);

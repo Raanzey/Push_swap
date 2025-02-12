@@ -6,7 +6,7 @@
 /*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 18:06:38 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/11 18:56:44 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/02/12 20:19:01 by yozlu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,38 @@
 
 void turk_sorter(t_stack *stk)
 {
-	int num_a;
-	
-    swap_step("pb", stk); 
+    swap_step("pb", stk);
+    //swap_step("pb", stk);
+	//list_print(stk->b);
 	if (list_len(stk->a) > 3)
 		swap_step("pb", stk);
-	while (list_len(stk->a) > 3)
+	//list_print(stk->b);
+	if (list_len(stk->a) > 3)
 	{
-		
-		num_b=movie_count_b(stk);	
+		number_b(stk);
 	}
-	
-	
 }
-int	movie_count_b(t_stack *stk)//-----> a sayısının kendinden küçük en büyük b sayısı
+int	number_b(t_stack *stk)
 {
-	
-	int temp;
-	while (stk->b)
-	{
-		if (stk->b->data < stk->a->data && stk->b->data > temp)
-			temp = stk->b->data;	
-		stk->b = stk->b->next;
-	} 
-	return temp;                             
+	int move;
+	int num_b;
+	int index_b;
+	int index_a;
+	// while (stk->a)
+	// {
+		num_b = number_find_b(stk, stk->a->data);
+		//printf("%p\n", stk->b);
+		printf("%d\n", num_b);
+		index_b = calculate_index(stk->b, num_b);//------>YANLIŞ ÇALIŞIYOR
+		printf("%d\n", index_b);
+		index_a = calculate_index(stk->a, stk->a->data);
+		printf("%d\n", index_a);
+		move = move_count(stk, index_a, index_b);
+		//printf("%d", move);
+		return(move);
+		//stk->a = stk->a->next;
+	//}
 }
-
-int num_find_a(t_stack *stk)
-{
-	
-}
+// int number_a(t_stack *stk)
+// {
+// }
