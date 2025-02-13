@@ -6,7 +6,7 @@
 /*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:48:08 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/12 20:18:29 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/02/13 19:17:25 by yozlu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,9 @@ int calculate_index(t_node *node, int data)
 {
 	int i;
 	t_node *temp;
-
 	temp = node;
 	i = 0;
-	if (temp != NULL && temp->data != data)
+	while (temp && temp->data != data)
 	{
 		i++;
 		temp = temp->next;

@@ -6,7 +6,7 @@
 /*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 16:20:45 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/12 20:17:04 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/02/13 19:34:51 by yozlu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,33 +28,75 @@ int	number_find_b(t_stack *stk, int data_a)//-----> a sayısının kendinden kü
 	return (temp);
 }
 
-int	move_count(t_stack *stk, int index_a, int index_b)
+int max_value_b(t_stack *stk)
 {
-	if (list_len(stk->a) / 2 > index_a && list_len(stk->b) / 2 > index_b)
+	int result;
+	t_node *temp_b;
+	t_node *temp_x;
+	
+	result = 0;
+	temp_b = stk->b;
+	temp_x = stk->b;
+	while (temp_x)
+	{
+		temp_b = stk->b;
+		while (temp_b->next)
+		{
+			if (temp_x->data > temp_b->next->data)
+				result = temp_x->data;
+			temp_b = temp_b->next;				
+		}
+		temp_x = temp_x->next;
+	}
+	printf("%d",result);
+	return (result);
+}
+
+int	move_count(t_stack *stk, int index_a, int index_b)
+{		
+	if (list_len(stk->a) / 2 > index_a && list_len(stk->b) / 2 > index_b) //+ +
 	{
 		if (index_a > index_b)
 			return (index_a);
 		return (index_b);
 	}
-	else if (list_len(stk->a) / 2 < index_a && list_len(stk->b) / 2 > index_b)
-		return (index_a + index_b);
-	else if (list_len(stk->a) / 2 > index_a && list_len(stk->b) / 2 < index_b)
-		return (index_a + index_b);
-	else if (list_len(stk->a) / 2 < index_a && list_len(stk->b) / 2 < index_b)
+	else if (list_len(stk->a) / 2 <= index_a && list_len(stk->b) / 2 >= index_b) //- +
+		return (list_len(stk->a)-index_a + index_b);
+	else if (list_len(stk->a) / 2 >= index_a && list_len(stk->b) / 2 <= index_b)//+ -
+		return (index_a + list_len(stk->b)-index_b);
+	else if (list_len(stk->a) / 2 <= index_a && list_len(stk->b) / 2 <= index_b) //- -
 	{
 		if (index_a > index_b)
-			return (index_a);
-		return (index_b);
+			return (list_len(stk->a)-index_a);
+		return (list_len(stk->b)-index_b);
 	}
 	return (0);
 }
-int	number_find_a(t_stack *stk)
+int	number_b(t_stack *stk, int result_move, int result_index)
 {
-	int temp;
-	while (stk->a)
+	int	move;
+	int	num_b;
+	int	index_b;
+	int	index_a;
+	t_node *temp;
+	
+	temp = stk->a;
+	while (temp)
 	{
-		temp = number_find_b(stk, stk->a->data);
-		stk->a = stk->a->next;
+		num_b = number_find_b(stk, temp->data);
+		index_b = calculate_index(stk->b, num_b);
+		index_a = calculate_index(stk->a, temp->data);		
+		move = move_count(stk, index_a, index_b);
+		if (move < result_move && index_a < result_index)
+		{
+			result_index = index_a;
+			result_move = move;			
+		}	
+		temp = temp->next;
 	}
-	return (temp);
+	// if (result_index == -1)
+	// {
+	// 	num_b = max_value_b(stk); max value işlemde kendinden küçük en büyük sayı yoksa bu fonksiyon.
+	// }
+	return (result_index);
 }

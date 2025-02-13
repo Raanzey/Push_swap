@@ -6,7 +6,7 @@
 /*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:41:06 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/08 18:39:55 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/02/13 15:11:15 by yozlu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 void	error(char **data, char *temp_free)
 {
 	free(temp_free);
+	free_argv(data);
+	write(1, "Error\n", 6);
+	exit(EXIT_FAILURE);
+}
+void	error_av(char **data)
+{
 	free_argv(data);
 	write(1, "Error\n", 6);
 	exit(EXIT_FAILURE);
@@ -60,7 +66,7 @@ void	check_last(char **data)
 		while (data[j])
 		{
 			if (ft_strcmp(data[i], data[j++]) == 0)
-				error(data, data[i]);
+				error_av(data);
 		}
 	}
 	i = 0;
