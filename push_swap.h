@@ -6,7 +6,7 @@
 /*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 17:15:29 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/13 19:32:06 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/02/14 17:32:26 by yozlu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ t_node			*rev_rotate_ab(t_node *node);
 t_node			*step_ss(t_node *node);
 t_node			*addValue(t_node *node, int data);
 
-int				max_value_b(t_stack *stk);
 int				calculate_num(t_stack *stk);
 int				number_find_a(t_stack *stk);
 int				move_count(t_stack *stk, int index_a, int index_b);
@@ -49,6 +48,7 @@ int				ft_strcmp(const char *str1, const char *str2);
 long			ft_atol(const char *str);
 char			**split_check(int argc, char **argv);
 
+void			plus_plus(t_stack *stk, int index_a, int index_b);
 void			turk_sorter(t_stack *stk);
 void			list_op_add(t_stack *stk, char **av, int ac);
 void			sorter_3(t_stack *stk);
