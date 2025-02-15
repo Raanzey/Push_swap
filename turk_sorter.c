@@ -6,7 +6,7 @@
 /*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 18:06:38 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/14 17:57:24 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/02/15 19:19:40 by yozlu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,24 @@ void	turk_sorter(t_stack *stk)
 	swap_step("pb", stk);
 	if (list_len(stk->a) > 3)
 		swap_step("pb", stk);	
-	if (list_len(stk->a) > 3)
+	while (list_len(stk->a) > 3)
 	{	
 		num_a = calculate_num(stk);
 		num_b = number_find_b(stk, num_a);
-		
-		printf("A---->%d\n",num_a);			
-		printf("B---->%d\n",num_b);		
+		sorter_push_b(stk, num_a, num_b);		
 	}
+	sorter_3(stk);
+	max_number_find_b(stk, stk->b->data);
+	while (stk->b)
+	{
+		num_a = number_find_a(stk, stk->b->data);
+		sorter_push_a(stk, num_a, stk->b->data);
+	}
+	if (min_number_a(stk) != 0)
+	{
+		first_min_number_a(stk, min_number_a(stk));
+	}	
+	list_print(stk->a);
 }
 int calculate_num(t_stack *stk)
 {
@@ -42,11 +52,45 @@ int calculate_num(t_stack *stk)
 	}
 	return a;	
 }
-void plus_plus(t_stack *stk, int index_a, int index_b)
+void sorter_push_b(t_stack *stk, int num_a, int num_b)
 {
+	int index_a;
+	int index_b;
+	index_a = calculate_index(stk->a, num_a);
+	index_b = calculate_index(stk->b, num_b);
 	
+	if (list_len(stk->a) / 2 > index_a && list_len(stk->b) / 2 > index_b) //+ +
+		plus_plus(stk, num_a, num_b, 0);	
+	else if (list_len(stk->a) / 2 <= index_a && list_len(stk->b) / 2 >= index_b) //- +
+	 	minus_plus(stk, num_a, num_b, 0);
+	else if (list_len(stk->a) / 2 >= index_a && list_len(stk->b) / 2 <= index_b)//+ -
+		plus_minus(stk, num_a, num_b, 0);
+	else if (list_len(stk->a) / 2 <= index_a && list_len(stk->b) / 2 <= index_b) //- -
+		minus_minus(stk, num_a, num_b, 0);			
 }
-void plus_minus()
+int	number_find_b(t_stack *stk, int data_a)//-----> a sayısının kendinden küçük en büyük b sayısı
 {
+	int min;
+	int max;
+	int count;
+	t_node *temp_b;
 	
+	count = 0;
+	min = -2147483648;
+	max = -2147483648;
+	temp_b = stk->b;
+	while (temp_b)
+	{
+		if (temp_b->data < data_a && temp_b->data > min)
+		{
+			min = temp_b->data;
+			count++;
+		}
+		else if(temp_b->data > data_a && temp_b->data > max)
+			max = temp_b->data;			
+		temp_b = temp_b->next;
+	}
+	if (count > 0)
+		return(min);	
+	return (max);
 }
