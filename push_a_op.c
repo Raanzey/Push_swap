@@ -6,7 +6,7 @@
 /*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 15:44:17 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/15 19:31:59 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/02/16 12:52:55 by yozlu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,41 +55,39 @@ int	min_number_a(t_stack *stk)
 	t_node	*temp;
 	
 	temp = stk->a;
-	min = temp->data;
-	while (temp->next)
-	{
-		if (temp->data > temp->next->data)
-			break;
-		temp = temp->next;
-	}
-	if (!temp->next) 
-		return 0;
-	temp = stk->a;
+	min = 2147483647;
+	//printf("MinSayi-----> %d\n",temp->data);
 	while (temp)
 	{
-		if (temp->data < min)
+		//printf("MinSayi-----> %d\n",min);
+		if (temp->data < min)	
 			min = temp->data;
 		temp = temp->next;
 	}
+	//printf("MinSayi-----> %d\n",min);
 	return (min);
 }
 void first_min_number_a(t_stack *stk, int data_a)
 {
 	int index_a;
-	index_a = calculate_index(stk->a,data_a) + 1;
-	if (list_len(stk->a) / 2 > index_a)
+	index_a = calculate_index(stk->a,data_a);
+	if (list_len(stk->a) / 2 >= index_a)
 	{
-		while (--index_a > 0)
-			swap_step("ra", stk);	
+		printf("BURADAA---->\n");
+		while (index_a > 0)
+		{
+			swap_step("ra", stk);
+			index_a--;
+		}
 	}
 	index_a = calculate_index(stk->a,data_a);
 	if (list_len(stk->a) / 2 < index_a)
 	{
+		printf("BURADAA---->\n");
 		while (index_a < list_len(stk->a))
 		{
 			swap_step("rra", stk);
 			index_a++;
 		}
-			
 	}
 }

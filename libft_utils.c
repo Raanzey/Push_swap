@@ -6,7 +6,7 @@
 /*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:25:19 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/13 15:11:07 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/02/16 12:40:53 by yozlu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,17 +88,4 @@ long	ft_atol(const char *str)
 	while (str[i] && str[i] >= 48 && str[i] <= 57)
 		result = result * 10 + str[i++] - '0';
 	return (result * count);
-}
-int	ft_strcmp(const char *str1, const char *str2)
-{
-	while (*str2 == '0')
-		str2++;
-	while (*str1 == '0')
-		str1++;
-	while (*str1 && (*str1 == *str2))
-	{
-		str1++;
-		str2++;
-	}
-	return (*str1 - *str2);
 }

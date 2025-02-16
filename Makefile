@@ -2,7 +2,7 @@ NAME = push_swap
 
 CFLAGS = cc -Wall -Wextra -Werror
 
-SOURCES = push_swap.c push_swap_utils.c control.c libft_utils.c list_op.c turk_sorter.c turk_sorter_utils.c push_b_op.c push_a_op.c
+SOURCES = push_swap.c push_swap_utils.c control.c libft_utils.c list_op.c turk_sorter.c turk_sorter_utils.c push_b_op.c push_a_op.c in_line_control.c
 
 LIBFT = libft/libft.a
 

@@ -6,7 +6,7 @@
 /*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 17:15:29 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/15 19:02:22 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/02/16 12:55:40 by yozlu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_node			*rev_rotate_ab(t_node *node);
 t_node			*step_ss(t_node *node);
 t_node			*addValue(t_node *node, int data);
 
+int				is_sorted(t_stack *stk);
 int				min_number_a(t_stack *stk);
 int				calculate_num(t_stack *stk);
 int				move_count(t_stack *stk, int index_a, int index_b);
@@ -58,7 +59,7 @@ void			plus_minus(t_stack *stk, int num_a, int num_b, int tmp);
 void			minus_plus(t_stack *stk, int num_a, int num_b, int tmp);
 void			plus_plus(t_stack *stk, int num_a, int num_b, int tmp);
 void			sorter_push_b(t_stack *stk, int num_a, int num_b);
-void			turk_sorter(t_stack *stk);
+void			turk_sorter(t_stack *stk, int num_a, int num_b);
 void			list_op_add(t_stack *stk, char **av, int ac);
 void			sorter_3(t_stack *stk);
 void			swap_step(char *str, t_stack *stk);
