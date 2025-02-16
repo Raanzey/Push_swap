@@ -6,12 +6,11 @@
 /*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 14:57:21 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/10 15:45:06 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/02/16 13:18:56 by yozlu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 t_node	*step_ss(t_node *node)
 {

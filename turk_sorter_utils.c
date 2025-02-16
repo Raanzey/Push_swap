@@ -6,7 +6,7 @@
 /*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 16:20:45 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/15 15:43:20 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/02/16 18:39:23 by yozlu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,12 @@ void	max_number_find_b(t_stack *stk, int data_b)
 		temp_b = temp_b->next;
 	}
 	max_index = calculate_index(stk->b, max);
+	printf("MAX B İNDEX SAYISI----> %d\n", max_index);
 	max_number_top_b(stk, max_index);	
 }
 int	move_count(t_stack *stk, int index_a, int index_b)
 {		
-	if (list_len(stk->a) / 2 > index_a && list_len(stk->b) / 2 > index_b) //+ +
+	if (list_len(stk->a) / 2 >= index_a && list_len(stk->b) / 2 >= index_b) //+ +
 	{
 		if (index_a > index_b)
 			return (index_a);

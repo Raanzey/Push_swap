@@ -6,12 +6,11 @@
 /*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:41:06 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/13 15:11:15 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/02/16 13:18:39 by yozlu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <unistd.h>
 
 void	error(char **data, char *temp_free)
 {

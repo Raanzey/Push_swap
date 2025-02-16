@@ -6,7 +6,7 @@
 /*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 12:33:28 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/16 12:40:56 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/02/16 13:30:57 by yozlu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,27 @@ int	is_sorted(t_stack *stk)
 	}
 	return (1);
 }
-int	ft_strcmp(const char *str1, const char *str2)
+void	ft_putnbr(int n)
 {
-	while (*str2 == '0')
-		str2++;
-	while (*str1 == '0')
-		str1++;
-	while (*str1 && (*str1 == *str2))
+	char	c;
+
+	if (n == -2147483648)
 	{
-		str1++;
-		str2++;
+		write(1, "-2147483648\n", 12);
+		return;
 	}
-	return (*str1 - *str2);
+	if (n < 0)
+	{
+		write(1, "-", 1);
+		n = -n;
+	}
+	if (n >= 10)
+		ft_putnbr(n / 10);
+	c = (n % 10) + '0';
+	write(1, &c, 1);
+}
+void	ft_putstr(char *str)
+{
+	while (*str)
+		write(1, str++, 1);
 }
