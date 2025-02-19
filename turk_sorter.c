@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   turk_sorter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 18:06:38 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/16 18:45:47 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/02/19 22:08:59 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	turk_sorter(t_stack *stk, int num_a, int num_b)
 {
-	int i;
-	i = 0;
+	// int i;
+	// i = 0;
 	// printf("A listesi---->\n");
 	// list_print(stk->a);
 	swap_step("pb", stk);
@@ -25,27 +25,30 @@ void	turk_sorter(t_stack *stk, int num_a, int num_b)
 		while (list_len(stk->a) > 3)
 		{	
 			num_a = calculate_num(stk);
-			printf("A SAYISI----> %d\n", num_a);
+			//printf("A SAYISI----> %d\n", num_a);
 			num_b = number_find_b(stk, num_a);
-			printf("B SAYISI----> %d\n", num_b);
+			//printf("B SAYISI----> %d\n", num_b);
 			sorter_push_b(stk, num_a, num_b);
 		}
-		// sorter_3(stk);
-		// max_number_find_b(stk, stk->b->data);
+		sorter_3(stk);
+		max_number_find_b(stk, stk->b->data);
 	}
-	// while (stk->b)
-	// {
-	// 	num_a = number_find_a(stk, stk->b->data);
-	// 	printf("YENİ A SAYISI----> %d\n", num_a);
-	// 	sorter_push_a(stk, num_a, stk->b->data);
-	// 	i++;
-	// }
-	// if (is_sorted(stk) == 0)
-	// 	first_min_number_a(stk, min_number_a(stk));
-	printf("A listesi---->\n");
-	list_print(stk->a);
-	printf("B listesi---->\n");
-	list_print(stk->b);
+	while (list_len(stk->b) > 1)
+	{
+		num_a = number_find_a(stk, stk->b->data);
+		// printf("YENİ B SAYISI----> %d\n", stk->b->data);
+		// printf("YENİ A SAYISI----> %d\n", num_a);
+		sorter_push_a(stk, num_a, stk->b->data);
+		//i++;
+	}
+	if (list_len(stk->b) == 1)
+		swap_step("pa", stk);
+	if (is_sorted(stk) == 0)
+		first_min_number_a(stk, min_number_a(stk));
+	//printf("A listesi---->\n");
+	//list_print(stk->a);
+	//printf("B listesi---->\n");
+	//list_print(stk->b);
 }
 int	calculate_num(t_stack *stk)
 {
@@ -71,7 +74,7 @@ void	sorter_push_b(t_stack *stk, int num_a, int num_b)
 	//printf("İNDEX_A----->%d\n",index_a);
 	index_b = calculate_index(stk->b, num_b);
 	//printf("İNDEX_B----->%d\n",index_b);
-	if (list_len(stk->a) / 2 >= index_a && list_len(stk->b) / 2 >= index_b) //+ +
+	if (list_len(stk->a) / 2 > index_a && list_len(stk->b) / 2 > index_b) //+ +
 		plus_plus(stk, num_a, num_b, 0);
 	else if (list_len(stk->a) / 2 <= index_a && list_len(stk->b) / 2 >= index_b)//- +
 		minus_plus(stk, num_a, num_b, 0);

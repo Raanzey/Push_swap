@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_b_op.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 13:44:08 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/16 15:48:57 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/02/19 22:13:17 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,20 @@ void	plus_plus(t_stack *stk, int num_a, int num_b, int tmp) //+ +
 	if (index_a < index_b)
 	{
 		while (--index_a > 0)
+		{
 			swap_step("rr", stk);
+			index_b--;
+		}
 		while (--index_b > 0)
 			swap_step("rb", stk);
 	}
 	else if (index_a > index_b)
 	{
 		while (--index_b > 0)
+		{
 			swap_step("rr", stk);
+			index_a--;
+		}
 		while (--index_a > 0)
 			swap_step("ra", stk);
 	}
@@ -48,8 +54,8 @@ void	minus_plus(t_stack *stk, int num_a, int num_b, int tmp) //- +
 	index_b = calculate_index(stk->b, num_b) + 1;
 	while (++index_a != list_len(stk->a))
 		swap_step("rra", stk);
-	if (++index_a == list_len(stk->a))
-		swap_step("rra", stk);
+	// if (++index_a == list_len(stk->a))
+	// 	swap_step("rra", stk);
 	while (--index_b > 0)
 		swap_step("rb", stk);
 	if (tmp == 0)
@@ -65,8 +71,8 @@ void	plus_minus(t_stack *stk, int num_a, int num_b, int tmp) //+ -
 	index_b = calculate_index(stk->b, num_b) - 1;
 	while (++index_b != list_len(stk->b))
 		swap_step("rrb", stk);
-	if (++index_b == list_len(stk->b))
-		swap_step("rrb", stk);
+	// if (++index_b == list_len(stk->b))
+	// 	swap_step("rrb", stk);
 	while (--index_a > 0)
 		swap_step("ra", stk);
 	if (tmp == 0)
@@ -83,20 +89,26 @@ void	minus_minus(t_stack *stk, int num_a, int num_b, int tmp) //- -
 	if (index_b < index_a)
 	{
 		while (++index_b < list_len(stk->b))
+		{
 			swap_step("rrr", stk);
+			index_a++;
+		}
 		while (++index_a < list_len(stk->a))
 			swap_step("rra", stk);
 	}
 	else if (index_b > index_a)
 	{
 		while (++index_a < list_len(stk->a))
+		{
 			swap_step("rrr", stk);
+			index_b++;
+		}
 		while (++index_b < list_len(stk->b))
 			swap_step("rrb", stk);
 	}
 	else
-		while (--index_a > list_len(stk->a) && --index_b > list_len(stk->b))
-			swap_step("rr", stk);
+		while (++index_a > list_len(stk->a) && ++index_b > list_len(stk->b))
+			swap_step("rrr", stk);
 	if (tmp == 0)
 		swap_step("pb", stk);
 	else

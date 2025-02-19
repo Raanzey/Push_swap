@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   turk_sorter_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 16:20:45 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/16 18:39:23 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/02/19 22:08:02 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ void	max_number_find_b(t_stack *stk, int data_b)
 		temp_b = temp_b->next;
 	}
 	max_index = calculate_index(stk->b, max);
-	printf("MAX B İNDEX SAYISI----> %d\n", max_index);
+	//printf("MAX B İNDEX SAYISI----> %d\n", max_index);
 	max_number_top_b(stk, max_index);	
 }
 int	move_count(t_stack *stk, int index_a, int index_b)
 {		
-	if (list_len(stk->a) / 2 >= index_a && list_len(stk->b) / 2 >= index_b) //+ +
+	if (list_len(stk->a) / 2 > index_a && list_len(stk->b) / 2 > index_b) //+ +
 	{
 		if (index_a > index_b)
 			return (index_a);
@@ -81,11 +81,15 @@ int	number_b(t_stack *stk, int result_move, int result_index)
 	while (temp)
 	{
 		num_b = number_find_b(stk, temp->data);
+		//printf("NUM B SAYISI----> %d\n", num_b);
+		//printf("NUM A SAYISI----> %d\n", temp->data);
 		index_b = calculate_index(stk->b, num_b);
 		index_a = calculate_index(stk->a, temp->data);		
 		move = move_count(stk, index_a, index_b);
-		if (move < result_move && index_a < result_index)
+		//printf("HAMLE SAYISI----> %d\n", move);
+		if (move < result_move || index_a < result_index)
 		{
+			//printf("SONUC HAMLE SAYISI----> %d\n", result_move);
 			result_index = index_a;
 			result_move = move;			
 		}	
