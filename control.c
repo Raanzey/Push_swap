@@ -6,7 +6,7 @@
 /*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:41:06 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/16 13:18:39 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/02/20 17:34:56 by yozlu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ void	check(char **data)
 		if (ft_atol(data[i]) > 2147483647 || ft_atol(data[i]) < -2147483648)
 			error(data, free_temp);
 		temp = ft_atol(data[i]);
-		free_temp = ft_itoa(temp);
-		if (ft_strcmp(free_temp, data[i]) != 0 && (data[i][0] != '+'
+		free_temp = ft_itoa(temp);		if (ft_strcmp(free_temp, data[i]) != 0 && (data[i][0] != '+'
 			&& data[i][0] != '-'))
 			error(data, free_temp);
 		free(free_temp);

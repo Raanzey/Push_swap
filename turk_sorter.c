@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   turk_sorter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 18:06:38 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/19 22:08:59 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/02/20 21:42:37 by yozlu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,65 +23,85 @@ void	turk_sorter(t_stack *stk, int num_a, int num_b)
 	{
 		swap_step("pb", stk);
 		while (list_len(stk->a) > 3)
-		{	
+		{				
 			num_a = calculate_num(stk);
 			//printf("A SAYISI----> %d\n", num_a);
 			num_b = number_find_b(stk, num_a);
 			//printf("B SAYISI----> %d\n", num_b);
 			sorter_push_b(stk, num_a, num_b);
+			// printf("A listesi---->\n");
+			// list_print(stk->a);
+			// printf("B listesi---->\n");
+			// list_print(stk->b);
 		}
-		sorter_3(stk);
-		max_number_find_b(stk, stk->b->data);
+		// sorter_3(stk);
+		// max_number_find_b(stk, stk->b->data);
 	}
-	while (list_len(stk->b) > 1)
-	{
-		num_a = number_find_a(stk, stk->b->data);
-		// printf("YENİ B SAYISI----> %d\n", stk->b->data);
-		// printf("YENİ A SAYISI----> %d\n", num_a);
-		sorter_push_a(stk, num_a, stk->b->data);
-		//i++;
-	}
-	if (list_len(stk->b) == 1)
-		swap_step("pa", stk);
-	if (is_sorted(stk) == 0)
-		first_min_number_a(stk, min_number_a(stk));
+	// while (stk->b)
+	// {
+	// 	num_a = number_find_a(stk, stk->b->data);
+	// 	// printf("YENİ B SAYISI----> %d\n", stk->b->data);
+	// 	// printf("YENİ A SAYISI----> %d\n", num_a);
+	// 	sorter_push_a(stk, num_a, stk->b->data);
+	// 	//i++;
+	// }
+	// if (list_len(stk->b) == 1)
+	// 	swap_step("pa", stk);
+	// if (is_sorted(stk) == 0)
+	// 	first_min_number_a(stk, min_number_a(stk));
 	//printf("A listesi---->\n");
 	//list_print(stk->a);
-	//printf("B listesi---->\n");
-	//list_print(stk->b);
+	// printf("B listesi---->\n");
+	// list_print(stk->b);
 }
 int	calculate_num(t_stack *stk)
 {
-	int		a;
 	t_node	*temp;
+	int i = 0;
+	int index = number_b(stk, 2147483647, 2147483647);
+	//printf("index: %d\n", index);
 
 	temp = stk->a;
-	while (temp)
-	{
-		if (number_b(stk, 2147483647, 0) == calculate_index(stk->a, temp->data))
-			a = temp->data;
+	while (i++ < index)
 		temp = temp->next;
-		//printf("NUM_A---->%d\n",a);
-	}
-	return (a);
+	//printf("TEMP------->%d\n",temp->data);
+	return (temp->data);
 }
 void	sorter_push_b(t_stack *stk, int num_a, int num_b)
 {
 	int	index_a;
 	int	index_b;
+	int len_a;
+	int len_b;
 
+	len_a = list_len(stk->a);
+	len_b = list_len(stk->b);
+	if (list_len(stk->a) % 2 == 1)
+		len_a = list_len(stk->a) + 1;
+	if (list_len(stk->b) % 2 == 1)
+		len_b = list_len(stk->b) + 1;		
 	index_a = calculate_index(stk->a, num_a);
-	//printf("İNDEX_A----->%d\n",index_a);
 	index_b = calculate_index(stk->b, num_b);
-	//printf("İNDEX_B----->%d\n",index_b);
-	if (list_len(stk->a) / 2 > index_a && list_len(stk->b) / 2 > index_b) //+ +
+	if (len_a / 2 > index_a && len_b / 2 > index_b) //+ +
+	{
+		//printf("+ +\n");
 		plus_plus(stk, num_a, num_b, 0);
-	else if (list_len(stk->a) / 2 <= index_a && list_len(stk->b) / 2 >= index_b)//- +
+	}
+	else if (len_a / 2 <= index_a && len_b / 2 > index_b)//- +
+	{	
+		//printf("- +\n");
 		minus_plus(stk, num_a, num_b, 0);
-	else if (list_len(stk->a) / 2 >= index_a && list_len(stk->b) / 2 <= index_b)//+ -
+	}
+	else if (len_a / 2 > index_a && len_b / 2 <= index_b)//+ -
+	{	
+		//printf("+ -\n");
 		plus_minus(stk, num_a, num_b, 0);
-	else if (list_len(stk->a) / 2 <= index_a && list_len(stk->b) / 2 <= index_b)//- -
+	}
+	else if (len_a / 2 <= index_a && len_b / 2 <= index_b)//- -
+	{
+		//printf("- -\n");
 		minus_minus(stk, num_a, num_b, 0);
+	}
 }
 int	number_find_b(t_stack *stk, int data_a)
 {
