@@ -6,7 +6,7 @@
 /*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 15:44:17 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/20 20:06:55 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/02/21 18:17:01 by yozlu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,27 @@ int	number_find_a(t_stack *stk, int data_b)
 	int		max;
 	int		min;
 	t_node	*temp_a;
+	int count;
 
 	temp_a = stk->a;
+	count = 0;
 	max = 2147483647;
 	min = 2147483647;
 	while (temp_a)
 	{
-		if (temp_a->data > data_b && temp_a->data < max)
-			max = temp_a->data;
-		if (temp_a->data < min)
+		if (temp_a->data > data_b && temp_a->data < min)
+		{
 			min = temp_a->data;
+			count++;
+		}
+		else if (temp_a->data < data_b && temp_a->data < max)
+			max = temp_a->data;
 		temp_a = temp_a->next;
 	}
-	if (max != 2147483647)
-		return (max);
-	return (min);
+	if (count > 0)
+		return (min);
+	
+	return (max);
 }
 void	sorter_push_a(t_stack *stk, int num_a, int num_b)
 {
@@ -41,11 +47,7 @@ void	sorter_push_a(t_stack *stk, int num_a, int num_b)
 	int len_b;
 
 	len_a = list_len(stk->a);
-	len_b = list_len(stk->b);
-	if (list_len(stk->a) % 2 == 1)
-		len_a = list_len(stk->a) + 1;
-	if (list_len(stk->b) % 2 == 1)
-		len_b = list_len(stk->b) + 1;		
+	len_b = list_len(stk->b);	
 	index_a = calculate_index(stk->a, num_a);
 	index_b = calculate_index(stk->b, num_b);
 	if (len_a / 2 > index_a && len_b / 2 > index_b) //+ +

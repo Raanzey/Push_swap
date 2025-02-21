@@ -6,7 +6,7 @@
 /*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 16:20:45 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/20 21:41:39 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/02/21 17:50:12 by yozlu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,6 @@ int	move_count(t_stack *stk, int index_a, int index_b, int len_a)
 	int	len_b;
 
 	len_b = list_len(stk->b);
-	if (list_len(stk->a) % 2 == 1)
-		len_a = list_len(stk->a) + 1;
-	if (list_len(stk->b) % 2 == 1)
-		len_b = list_len(stk->b) + 1;
 	if (len_a / 2 > index_a && len_b / 2 > index_b) //+ +
 	{
 		if (index_a > index_b)
@@ -65,15 +61,24 @@ int	move_count(t_stack *stk, int index_a, int index_b, int len_a)
 		return (index_b);
 	}
 	else if (len_a / 2 <= index_a && len_b / 2 > index_b)//- +
-		return (list_len(stk->a) - index_a + index_b);
+	{
+
+		return (((  index_a - list_len(stk->a))*-1) + index_b);
+	}
 	else if (len_a / 2 > index_a && len_b / 2 <= index_b)//+ -
-		return (list_len(stk->b) - index_b + index_a);
+	{
+		
+		return ((( index_b-list_len(stk->b) )*-1) + index_a);}
 	else if (len_a / 2 <= index_a && len_b / 2 <= index_b)	//- -
 	{
 		if (index_a > index_b)
-			return (list_len(stk->a) - index_a);
-		return (list_len(stk->b) - index_b);
+		{
+			return (( index_a-list_len(stk->a) )*-1);
+		}
+		
+		return (( index_b-list_len(stk->b))*-1);
 	}
+	
 	return (0);
 }
 
@@ -89,20 +94,18 @@ int	number_b(t_stack *stk, int result_move, int result_index)
 	while (temp)
 	{
 		num_b = number_find_b(stk, temp->data);
-		// printf("NUM B SAYISI----> %d\n", num_b);
-		// printf("NUM A SAYISI----> %d\n", temp->data);
+
 		index_b = calculate_index(stk->b, num_b);
 		index_a = calculate_index(stk->a, temp->data);
 		move = move_count(stk, index_a, index_b,list_len(temp));
-		// printf("HAMLE SAYISI----> %d\n", move);
 		if (move < result_move)
 		{
 			result_move = move;
-			result_index = index_a;
-			//printf("index:%d, result_move: %d, move: %d, result_index: %d\n",
-				//index_a, result_move, move, result_index);
+			result_index = temp->data;
 		}
 		temp = temp->next;
-	}
+	}			 
+	// printf("hamle=%d ",result_move);
+	// printf("%d\n",result_index);
 	return (result_index);
 }

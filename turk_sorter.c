@@ -6,11 +6,70 @@
 /*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 18:06:38 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/20 21:42:37 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/02/21 18:25:42 by yozlu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+
+static void	functionop(t_stack *gen, t_node *list, int index, char *op)
+{
+	char	*r;
+	char	*rr;
+ 
+	if (ft_strcmp("a", op) == 0)
+	{
+		r = "ra";
+		rr = "rra";
+	}
+	else
+	{
+		r = "rb";
+		rr = "rrb";
+	}
+	if (list_len(list) / 2 >= index)
+		swap_step(r,gen);
+	else if (list_len(list) / 2 < index)
+		swap_step(rr,gen);
+}
+
+static void	pusher(t_stack *gen, int push)
+{
+	if (push == 1)
+		swap_step( "pb",gen);
+	else if (push == 2)
+		swap_step("pa",gen );
+}
+
+void	funtionpush(t_stack *gen, int numberb, int numbera, int push)
+{
+	t_node	*b;
+	t_node	*a;
+	int		indexb;
+	int		indexa;
+
+	a = gen->a;
+	b = gen->b;
+	indexa = calculate_index(a, numbera) - 1;
+	indexb = calculate_index(b, numberb) - 1;
+	while (gen->a->data != numbera || gen->b->data != numberb)
+	{
+		if ((list_len(gen->a) / 2 >= indexa && list_len(gen->b) / 2 >= indexb)
+			&& (gen->b->data != numberb && gen->a->data != numbera))
+			swap_step("rr",gen );
+		else if ((list_len(gen->a) / 2 < indexa && list_len(gen->b) / 2 < indexb)
+			&& (gen->b->data != numberb && gen->a->data != numbera))
+			swap_step("rrr",gen );
+		else if ((list_len(gen->a) / 2 > indexa || list_len(gen->a) / 2 <= indexa)
+			&& gen->a->data != numbera)
+			functionop(gen, gen->a, indexa, "a");
+		else if ((list_len(gen->b) / 2 > indexb || list_len(gen->b) / 2 <= indexb)
+			&& gen->b->data != numberb)
+			functionop(gen, gen->b, indexb, "b");
+	}
+	pusher(gen, push);
+}
 
 void	turk_sorter(t_stack *stk, int num_a, int num_b)
 {
@@ -24,31 +83,31 @@ void	turk_sorter(t_stack *stk, int num_a, int num_b)
 		swap_step("pb", stk);
 		while (list_len(stk->a) > 3)
 		{				
-			num_a = calculate_num(stk);
-			//printf("A SAYISI----> %d\n", num_a);
+			num_a = number_b(stk,2147483647, 2147483647);
 			num_b = number_find_b(stk, num_a);
-			//printf("B SAYISI----> %d\n", num_b);
-			sorter_push_b(stk, num_a, num_b);
-			// printf("A listesi---->\n");
-			// list_print(stk->a);
-			// printf("B listesi---->\n");
-			// list_print(stk->b);
-		}
-		// sorter_3(stk);
-		// max_number_find_b(stk, stk->b->data);
+		//	printf("%d ",num_a);
+		//	printf("%d\n",num_b);
+			sorter_push_b(stk,num_a,num_b);
+			//funtionpush(stk,num_b,num_a,1);
+		}	
+		// printf("A listesi---->\n");
+		// list_print(stk->a);
+		//printf("B listesi---->\n");
+		//list_print(stk->b);
+		 sorter_3(stk);
+		 max_number_find_b(stk, stk->b->data);
 	}
 	// while (stk->b)
 	// {
 	// 	num_a = number_find_a(stk, stk->b->data);
-	// 	// printf("YENİ B SAYISI----> %d\n", stk->b->data);
-	// 	// printf("YENİ A SAYISI----> %d\n", num_a);
+	// 	printf("%d\n",num_a);
 	// 	sorter_push_a(stk, num_a, stk->b->data);
 	// 	//i++;
 	// }
 	// if (list_len(stk->b) == 1)
 	// 	swap_step("pa", stk);
-	// if (is_sorted(stk) == 0)
-	// 	first_min_number_a(stk, min_number_a(stk));
+	//if (is_sorted(stk) == 0)
+	//	first_min_number_a(stk, min_number_a(stk));
 	//printf("A listesi---->\n");
 	//list_print(stk->a);
 	// printf("B listesi---->\n");
@@ -76,10 +135,6 @@ void	sorter_push_b(t_stack *stk, int num_a, int num_b)
 
 	len_a = list_len(stk->a);
 	len_b = list_len(stk->b);
-	if (list_len(stk->a) % 2 == 1)
-		len_a = list_len(stk->a) + 1;
-	if (list_len(stk->b) % 2 == 1)
-		len_b = list_len(stk->b) + 1;		
 	index_a = calculate_index(stk->a, num_a);
 	index_b = calculate_index(stk->b, num_b);
 	if (len_a / 2 > index_a && len_b / 2 > index_b) //+ +
