@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_a_op.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 15:44:17 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/21 18:17:01 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/02/22 16:00:22 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,38 +38,6 @@ int	number_find_a(t_stack *stk, int data_b)
 		return (min);
 	
 	return (max);
-}
-void	sorter_push_a(t_stack *stk, int num_a, int num_b)
-{
-	int	index_a;
-	int	index_b;
-	int len_a;
-	int len_b;
-
-	len_a = list_len(stk->a);
-	len_b = list_len(stk->b);	
-	index_a = calculate_index(stk->a, num_a);
-	index_b = calculate_index(stk->b, num_b);
-	if (len_a / 2 > index_a && len_b / 2 > index_b) //+ +
-	{
-		//printf("+ +\n");
-		plus_plus(stk, num_a, num_b, 1);
-	}
-	else if (len_a / 2 <= index_a && len_b / 2 > index_b)//- +
-	{	
-		//printf("- +\n");
-		minus_plus(stk, num_a, num_b, 1);
-	}
-	else if (len_a / 2 > index_a && len_b / 2 <= index_b)//+ -
-	{	
-		//printf("+ -\n");
-		plus_minus(stk, num_a, num_b, 1);
-	}
-	else if (len_a / 2 <= index_a && len_b / 2 <= index_b)//- -
-	{
-		//printf("- -\n");
-		minus_minus(stk, num_a, num_b, 1);
-	}
 }
 int	min_number_a(t_stack *stk)
 {

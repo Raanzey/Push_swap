@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   push_b_op.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 13:44:08 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/21 16:11:05 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/02/22 15:58:47 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	plus_plus(t_stack *stk, int num_a, int num_b, int tmp)
+void	plus_plus(t_stack *stk, int num_a, int num_b, char push_list)
 {
 	int	index_a = calculate_index(stk->a, num_a);
 	int	index_b = calculate_index(stk->b, num_b);
@@ -33,13 +33,13 @@ void	plus_plus(t_stack *stk, int num_a, int num_b, int tmp)
 		swap_step("ra", stk);
 		index_a--;
 	}
-	if (tmp == 0)
+	if (push_list == 'b')
 		swap_step("pb", stk);
 	else
 		swap_step("pa", stk);
 }
 
-void	minus_plus(t_stack *stk, int num_a, int num_b, int tmp)
+void	minus_plus(t_stack *stk, int num_a, int num_b, char push_list)
 {
 	int	index_a = calculate_index(stk->a, num_a);
 	int	index_b = calculate_index(stk->b, num_b);
@@ -54,13 +54,13 @@ void	minus_plus(t_stack *stk, int num_a, int num_b, int tmp)
 		swap_step("rb", stk);
 		index_b--;
 	}
-	if (tmp == 0)
+	if (push_list == 'b')
 		swap_step("pb", stk);
 	else
 		swap_step("pa", stk);
 }
 
-void	plus_minus(t_stack *stk, int num_a, int num_b, int tmp)
+void	plus_minus(t_stack *stk, int num_a, int num_b, char push_list)
 {
 	int	index_a = calculate_index(stk->a, num_a);
 	int	index_b = calculate_index(stk->b, num_b);
@@ -75,13 +75,13 @@ void	plus_minus(t_stack *stk, int num_a, int num_b, int tmp)
 		swap_step("ra", stk);
 		index_a--;
 	}
-	if (tmp == 0)
+	if (push_list == 'b')
 		swap_step("pb", stk);
 	else
 		swap_step("pa", stk);
 }
 
-void	minus_minus(t_stack *stk, int num_a, int num_b, int tmp)
+void	minus_minus(t_stack *stk, int num_a, int num_b, char push_list)
 {
 	int	index_a = calculate_index(stk->a, num_a);
 	int	index_b = calculate_index(stk->b, num_b);
@@ -102,7 +102,7 @@ void	minus_minus(t_stack *stk, int num_a, int num_b, int tmp)
 		swap_step("rrb", stk);
 		index_b++;
 	}
-	if (tmp == 0)
+	if (push_list == 'b')
 		swap_step("pb", stk);
 	else
 		swap_step("pa", stk);

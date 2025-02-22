@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   turk_sorter_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 16:20:45 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/21 17:50:12 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/02/22 15:52:38 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	max_number_find_b(t_stack *stk, int data_b)
 		temp_b = temp_b->next;
 	}
 	max_index = calculate_index(stk->b, max);
-	// printf("MAX B İNDEX SAYISI----> %d\n", max_index);
 	max_number_top_b(stk, max_index);
 }
 int	move_count(t_stack *stk, int index_a, int index_b, int len_a)
@@ -54,35 +53,30 @@ int	move_count(t_stack *stk, int index_a, int index_b, int len_a)
 	int	len_b;
 
 	len_b = list_len(stk->b);
-	if (len_a / 2 > index_a && len_b / 2 > index_b) //+ +
+	if (list_len(stk->a) % 2 == 1)
+		len_a = list_len(stk->a) + 1;
+	if (list_len(stk->b) % 2 == 1)
+		len_b = list_len(stk->b) + 1;
+	if (len_a / 2 > index_a && len_b / 2 > index_b)
 	{
-		if (index_a > index_b)
+		if (index_a >= index_b)
 			return (index_a);
 		return (index_b);
 	}
-	else if (len_a / 2 <= index_a && len_b / 2 > index_b)//- +
-	{
-
+	else if (len_a / 2 <= index_a && len_b / 2 > index_b)
 		return (((  index_a - list_len(stk->a))*-1) + index_b);
-	}
-	else if (len_a / 2 > index_a && len_b / 2 <= index_b)//+ -
+	else if (len_a / 2 > index_a && len_b / 2 <= index_b)
+		return ((( index_b-list_len(stk->b) )*-1) + index_a);
+	else if (len_a / 2 <= index_a && len_b / 2 <= index_b)
 	{
-		
-		return ((( index_b-list_len(stk->b) )*-1) + index_a);}
-	else if (len_a / 2 <= index_a && len_b / 2 <= index_b)	//- -
-	{
-		if (index_a > index_b)
-		{
-			return (( index_a-list_len(stk->a) )*-1);
-		}
-		
-		return (( index_b-list_len(stk->b))*-1);
+		if (list_len(stk->a) - index_a > list_len(stk->b) - index_b)
+			return ((index_a - list_len(stk->a))*-1);
+		return (( index_b - list_len(stk->b))*-1);
 	}
-	
 	return (0);
 }
 
-int	number_b(t_stack *stk, int result_move, int result_index)
+int	number_b(t_stack *stk, int result_move, int result_num)
 {
 	int		move;
 	int		num_b;
@@ -97,15 +91,13 @@ int	number_b(t_stack *stk, int result_move, int result_index)
 
 		index_b = calculate_index(stk->b, num_b);
 		index_a = calculate_index(stk->a, temp->data);
-		move = move_count(stk, index_a, index_b,list_len(temp));
+		move = move_count(stk, index_a, index_b, list_len(stk->a));
 		if (move < result_move)
 		{
 			result_move = move;
-			result_index = temp->data;
+			result_num = temp->data;
 		}
 		temp = temp->next;
 	}			 
-	// printf("hamle=%d ",result_move);
-	// printf("%d\n",result_index);
-	return (result_index);
+	return (result_num);
 }

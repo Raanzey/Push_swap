@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 17:13:01 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/21 18:25:49 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/02/22 15:40:58 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	swap_step(char *str, t_stack *stk)
 		stk->a = rev_rotate_ab(stk->a);
 	if (ft_strcmp(str, "rrb") == 0 || ft_strcmp(str, "rrr") == 0)
 		stk->b = rev_rotate_ab(stk->b);
-	 ft_putstr(str);
-	 write(1, "\n", 1);	
+	ft_putstr(str);
+	write(1, "\n", 1);	
 }
 
 t_node	*addValue(t_node *node, int data)
@@ -81,8 +81,8 @@ int	main(int argc, char **argv)
 	stk->b = NULL;
 	if (list_op_add(stk, av, argc, 0) == 0)
 		turk_sorter(stk, 0, 0);
-    // list_print(stk->a);
-    //  list_print(stk->b);
+    //list_print(stk->a);
+    // list_print(stk->b);
 	free_list(stk->b);
 	free_list(stk->a);
 	free_argv(av);
