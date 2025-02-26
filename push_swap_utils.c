@@ -6,7 +6,7 @@
 /*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 14:57:21 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/16 13:18:56 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/02/23 13:12:05 by yozlu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_node	*step_ss(t_node *node)
 	temp->next = node;
 	return (temp);
 }
+
 t_node	*push_b(t_stack *stk)
 {
 	t_node	*first;
@@ -47,6 +48,7 @@ t_node	*push_b(t_stack *stk)
 	free(temp);
 	return (stk->b);
 }
+
 t_node	*push_a(t_stack *stk)
 {
 	t_node	*first;
@@ -73,6 +75,7 @@ t_node	*push_a(t_stack *stk)
 	free(temp);
 	return (stk->a);
 }
+
 t_node	*rotate_ab(t_node *node)
 {
 	t_node	*temp;
@@ -86,6 +89,7 @@ t_node	*rotate_ab(t_node *node)
 	node->next = NULL;
 	return (temp);
 }
+
 t_node	*rev_rotate_ab(t_node *node)
 {
 	t_node	*last;

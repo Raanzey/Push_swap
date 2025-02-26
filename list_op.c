@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_op.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:48:08 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/19 21:45:13 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/02/26 13:05:36 by yozlu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	calculate_index(t_node *node, int data)
 	}
 	return (i);
 }
+
 int	list_len(t_node *node)
 {
 	int	count;
@@ -38,25 +39,29 @@ int	list_len(t_node *node)
 	}
 	return (count);
 }
-int	list_op_add(t_stack *stk, char **av, int ac, int count)
+
+int	list_op_add(t_stack *stk, char **av)
 {
 	int	i;
 
 	i = -1;
 	while (av[++i])
-		stk->a = addValue(stk->a, ft_atoi(av[i]));
-	if (ac == 4)
-	{
-		sorter_3(stk);
-		return count + 1;
-	}
-	else if (ac == 3)
+		stk->a = add_value(stk->a, ft_atoi(av[i]));
+	if (i == 1)
+		return (1);
+	else if (i == 2)
 	{
 		swap_step("sa", stk);
-		return count + 1;
+		return (1);
 	}
-	return 0;	
+	else if (i == 3)
+	{
+		sorter_3(stk);
+		return (1);
+	}
+	return (0);
 }
+
 void	sorter_3(t_stack *stk)
 {
 	int	a;
@@ -66,21 +71,34 @@ void	sorter_3(t_stack *stk)
 	a = stk->a->data;
 	b = stk->a->next->data;
 	c = stk->a->next->next->data;
+	if (a > b && b > c)
+	{
+		swap_step("sa", stk);
+		swap_step("rra", stk);
+	}
+	else if (a > c && c > b)
+		swap_step("ra", stk);
+	else if (a > b && a < c)
+		swap_step("sa", stk);
+	else if (b > c && c > a)
+	{
+		swap_step("sa", stk);
+		swap_step("ra", stk);
+	}
+	else if (a < b && a > c)
+		swap_step("rra", stk);
+}
 
-	if (a > b && b < c && a < c) 
-		swap_step("sa", stk);
-	else if (a > b && b > c)
+int	is_sorted(t_stack *stk)
+{
+	t_node	*temp;
+
+	temp = stk->a;
+	while (temp->next)
 	{
-		swap_step("sa", stk);
-		swap_step("rra", stk);
+		if (temp->data > temp->next->data)
+			return (0);
+		temp = temp->next;
 	}
-	else if (a > c && a > b)
-		swap_step("ra", stk);
-	else if (b > c && b > a) 
-	{
-		swap_step("sa", stk);
-		swap_step("ra", stk);
-	}
-	else if (c > a && c > b)
-		swap_step("rra", stk);
+	return (1);
 }

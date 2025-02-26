@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 17:13:01 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/22 15:40:58 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/02/26 16:59:22 by yozlu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static void	ft_putstr(char *str)
+{
+	while (*str)
+		write(1, str++, 1);
+}
 
 void	swap_step(char *str, t_stack *stk)
 {
@@ -31,10 +37,10 @@ void	swap_step(char *str, t_stack *stk)
 	if (ft_strcmp(str, "rrb") == 0 || ft_strcmp(str, "rrr") == 0)
 		stk->b = rev_rotate_ab(stk->b);
 	ft_putstr(str);
-	write(1, "\n", 1);	
+	write(1, "\n", 1);
 }
 
-t_node	*addValue(t_node *node, int data)
+t_node	*add_value(t_node *node, int data)
 {
 	t_node	*temp;
 
@@ -57,32 +63,23 @@ t_node	*addValue(t_node *node, int data)
 	temp->next->next = NULL;
 	return (node);
 }
-void	list_print(t_node *node)
-{
-	t_node	*temp;
 
-	temp = node;
-	while (temp != NULL)
-	{
-		ft_putnbr(temp->data);
-		write(1, "\n", 1);
-		temp = temp->next;
-	}
-}
 int	main(int argc, char **argv)
 {
 	t_stack	*stk;
 	char	**av;
 
+	if (argc == 1)
+		exit(EXIT_SUCCESS);
 	av = split_check(argc, argv);
+	if (argc == 2 && argv[1][0] == '\0')
+    	exit(EXIT_SUCCESS);
 	check(av);
 	stk = malloc(sizeof(t_stack));
 	stk->a = NULL;
 	stk->b = NULL;
-	if (list_op_add(stk, av, argc, 0) == 0)
+	if (list_op_add(stk, av) == 0)
 		turk_sorter(stk, 0, 0);
-    //list_print(stk->a);
-    // list_print(stk->b);
 	free_list(stk->b);
 	free_list(stk->a);
 	free_argv(av);

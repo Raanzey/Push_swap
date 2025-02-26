@@ -6,7 +6,7 @@
 /*   By: yozlu <yozlu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:25:19 by yozlu             #+#    #+#             */
-/*   Updated: 2025/02/16 13:26:30 by yozlu            ###   ########.fr       */
+/*   Updated: 2025/02/26 16:59:11 by yozlu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	free_list(t_node *node)
 		free(temp);
 	}
 }
+
 void	free_argv(char **argv)
 {
 	int	i;
@@ -35,6 +36,7 @@ void	free_argv(char **argv)
 		free(argv);
 	}
 }
+
 char	**split_check(int argc, char **argv)
 {
 	char	**av;
@@ -42,27 +44,28 @@ char	**split_check(int argc, char **argv)
 	int		j;
 
 	av = NULL;
-	i = 1;
+	i = 0;
 	if (argc == 2)
 		av = ft_split(argv[1], ' ');
+	if (av[0]== NULL)
+		error_av(av);
 	else
 	{
-		av = malloc(argc * sizeof(char*));
+		av = malloc(argc * sizeof(char *));
 		if (!av)
 			return (NULL);
-		j = 0;
-		while (argv[i])
+		j = -1;
+		while (argv[++i])
 		{
-			av[j] = ft_strdup(argv[i]);
-			if (!av[j])  
-                return(free_argv(av),NULL);  
-			i++;
-			j++;
+			av[++j] = ft_strdup(argv[i]);
+			if (!av[j])
+				return (free_argv(av), NULL);
 		}
 		av[j] = NULL;
 	}
 	return (av);
 }
+
 long	ft_atol(const char *str)
 {
 	int		i;
@@ -89,6 +92,7 @@ long	ft_atol(const char *str)
 		result = result * 10 + str[i++] - '0';
 	return (result * count);
 }
+
 int	ft_strcmp(const char *str1, const char *str2)
 {
 	while (*str2 == '0')
